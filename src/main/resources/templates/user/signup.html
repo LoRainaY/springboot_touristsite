@@ -8,8 +8,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Туристический сайт</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container">
     <form class="form-horizontal" role="form" method="POST" th:action="@{/signup}" th:object="${user}">
         <div class="row">
@@ -82,11 +111,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-control-feedback">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-control-feedback">
                          <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
                                th:errors="*{email}">
                          </span>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -103,9 +134,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="row">
             <div class="col-md-3 field-label-responsive">
                 <label for="password">Пароль</label>
