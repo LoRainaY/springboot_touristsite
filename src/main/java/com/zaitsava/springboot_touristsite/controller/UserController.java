@@ -22,12 +22,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
-    public ModelAndView login() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("user/login");
-        return model;
-    }
+//    @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
+//    public ModelAndView login() {
+//        ModelAndView model = new ModelAndView();
+//        model.setViewName("user/login");
+//        return model;
+//    }
+
+
 
     @GetMapping("/signup")
     public ModelAndView signup() {
@@ -44,13 +46,13 @@ public class UserController {
         User userExists = userService.findUserByEmail(user.getEmail());
 
         if(userExists != null) {
-            bindingResult.rejectValue("email", "error.user", "This email already exists!");
+            bindingResult.rejectValue("email", "error.user", "Пользователь с этой электронной почтой уже существует");
         }
         if(bindingResult.hasErrors()) {
             model.setViewName("user/signup");
         } else {
             userService.saveUser(user);
-            model.addObject("msg", "User has been registered successfully!");
+            model.addObject("msg", "Пользователь успешно зарегистрирован!");
             model.addObject("user", new User());
             model.setViewName("user/signup");
         }

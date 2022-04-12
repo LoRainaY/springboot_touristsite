@@ -70,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-md-3 field-label-responsive">
-                <label for="email">Email</label>
+                <label for="email">Адрес электронной почты</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -80,6 +80,13 @@
                                placeholder="username@domain.xx" required autofocus>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-control-feedback">
+                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}">
+                         </span>
             </div>
         </div>
         <div class="row">
@@ -97,17 +104,11 @@
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="form-control-feedback">
-                         <span class="text-danger align-middle" th:if="${#fields.hasErrors('email')}"
-                               th:errors="*{email}">
-                         </span>
-            </div>
-        </div>
+
 
         <div class="row">
             <div class="col-md-3 field-label-responsive">
-                <label for="password">Password</label>
+                <label for="password">Пароль</label>
             </div>
             <div class="col-md-6">
                 <div class="form-group has-danger">
@@ -129,7 +130,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Регистрация</button>
             </div>
         </div>
     </form>

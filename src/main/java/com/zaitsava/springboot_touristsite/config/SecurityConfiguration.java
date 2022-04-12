@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("favicon.ico").permitAll()
                 .antMatchers("/home/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable()
-                .formLogin().loginPage("/login").failureUrl("/login?error=true")
+                .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
                 .defaultSuccessUrl("/home/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
