@@ -2,7 +2,7 @@ package com.zaitsava.springboot_touristsite.service;
 
 import com.zaitsava.springboot_touristsite.entity.Role;
 import com.zaitsava.springboot_touristsite.entity.User;
-import com.zaitsava.springboot_touristsite.repository.RoleRespository;
+import com.zaitsava.springboot_touristsite.repository.RoleRepository;
 import com.zaitsava.springboot_touristsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRespository roleRespository;
+    private RoleRepository roleRespository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
