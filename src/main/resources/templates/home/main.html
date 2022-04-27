@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Главная страница</title>
@@ -35,12 +35,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <span th:case="${false}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                         </li></span>
+                    <span th:case="${true}">
+                        <li class="nav-item">
+                         <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                    </span>
+
+                </div>
             </ul>
         </div>
     </div>
 </nav>
-
-            <a href="/login" th:href="@{/login}" class="btn btn-large btn-success">Login</a>
-
 </body>
 </html>

@@ -54,20 +54,21 @@ public class UserController {
             userService.saveUser(user);
             model.addObject("msg", "Пользователь успешно зарегистрирован!");
             model.addObject("user", new User());
-            model.setViewName("user/signup");
+            model.setViewName("redirect:home/main");
         }
 
         return model;
     }
 
-    @GetMapping("/home/home")
+
+    @GetMapping("/home/main")
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
 
-        model.addObject("userName", user.getFirstname() + " " + user.getLastname()+" "+user.getPatronymic());
-        model.setViewName("home/home");
+        model.addObject("userName", "Добрый день,"+user.getFirstname() + " " + user.getLastname()+" "+user.getPatronymic());
+        model.setViewName("redirect:/");
         return model;
     }
 
