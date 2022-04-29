@@ -52,22 +52,22 @@
         </div>
     </div>
 </nav>
-<div>
 
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Животное</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="tour : ${tours}">
-            <td th:utext="${tour.title}"></td>
-            <td th:utext="${tour.price}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="card-deck">
+        <div class="mt-4" th:each="tour, iter: ${tours}">
+            <div class="card" style="width: 20rem">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><span th:utext="${tour.title}"/></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><span th:utext="${tour.startTime}"/> по
+                        <span th:utext="${tour.endTime}"/></h6>
+                    <p class="card-text"><span th:utext="${tour.description}"/></p>
+                    <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
