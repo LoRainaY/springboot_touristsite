@@ -21,14 +21,13 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
-        List<Tour> tours=tourRepository.findAll();
 
-        model.addAttribute("tours",tours);
-
+        model.addAttribute("tours",tourRepository.findAll());
         return "home/main";
     }
     @RequestMapping("/main")
     public String main() {
+
         return "redirect:/";
     }
     @RequestMapping("/login")

@@ -6,14 +6,15 @@ import javax.persistence.*;
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "code")
     private int id;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "startTime",length=20)
+    @Column(name = "start_time")
     private String startTime;
-    @Column(name = "endTime",length=20)
+    @Column(name = "end_time")
     private String endTime;
     @Column(name = "price")
     private double price;
