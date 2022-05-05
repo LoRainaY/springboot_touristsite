@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>Главная страница</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" th:src="@{/images/js.js}" src="/static/images/js.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
+
 </head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <div class="container">
         <a class="navbar-brand" href="/">Туристический сайт</a>
@@ -54,6 +53,7 @@
 </nav>
 
 <div class="container">
+    <button class="btn btn-success nBtn">New</button>
     <div class="card-deck">
         <div class="mt-4" th:each="tour, iter: ${tours}">
             <div class="card" style="width: 20rem">
@@ -63,11 +63,65 @@
                     <h6 class="card-subtitle mb-2 text-muted"><span th:utext="${tour.startTime}"/> по
                         <span th:utext="${tour.endTime}"/></h6>
                     <p class="card-text"><span th:utext="${tour.description}"/></p>
-                    <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                    <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Edit</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="myForm">
+    <form th:action="@{/save}" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Update tour or Create</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id" name="id" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title" name="title" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">description:</label>
+                            <input type="text" class="form-control" id="description" name="description" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime" class="col-form-label">startTime:</label>
+                            <input type="text" class="form-control" id="startTime" name="startTime" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime" class="col-form-label">endTime:</label>
+                            <input type="text" class="form-control" id="endTime" name="endTime" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-form-label">price:</label>
+                            <input type="text" class="form-control" id="price" name="price" value=""/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

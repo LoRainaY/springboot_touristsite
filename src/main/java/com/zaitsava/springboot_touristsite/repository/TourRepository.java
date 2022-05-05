@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TourRepository extends JpaRepository<Tour,Integer> {
-    List<Tour> findAll();
+
+
 }
