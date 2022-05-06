@@ -3,61 +3,74 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Sign in</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
-  <link rel="icon" th:href="@{/images/favicon.ico}"/>
+    <title>Sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
 </head>
 
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
-  <div class="container">
-    <a class="navbar-brand" href="/"><img th:src="@{/images/img.png}" width="40" height="40" class="d-inline-block align-top" alt="">Туристический сайт</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
+    <div class="container">
+        <a class="navbar-brand" href="/">Туристический сайт</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <span th:case="${false}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                         </li></span>
+                    <span th:case="${true}">
+                        <li class="nav-item">
+                         <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                    </span>
+
+                </div>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 <div class="container">
-  <div class="alert alert-danger" role="alert" th:if="${param.error}">
-    Неправильный email или пароль
-  </div>
-  <form th:action="@{/login}" method="post" >
-    <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Пароль</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" name="remember-me" /> Запомнить
-      </label>
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+        Неправильный email или пароль
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-    <div class="margin-top20 text-center"> Нет профиля? <a th:href="@{/signup}">Создайте новый</a></div>
-  </form>
+    <form th:action="@{/login}" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="remember-me"/> Запомнить
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <div class="margin-top20 text-center"> Нет профиля? <a th:href="@{/signup}">Создайте новый</a></div>
+    </form>
 </div>
 </body>
 </html>

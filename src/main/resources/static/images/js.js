@@ -26,3 +26,15 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function viewUser(id) {
+    $.ajax({
+        url: "/users/view/" + id,
+        success: function(response) {
+            console.log(response);
+            $('#viewUserHolder').html(response);
+            $('#viewUser').modal('open');
+        }
+    });
+}

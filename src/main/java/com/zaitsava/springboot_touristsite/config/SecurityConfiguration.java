@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/signup").permitAll()
                 .antMatchers("favicon.ico").permitAll()
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/main/**").hasAuthority("CLIENT").anyRequest()
+                .antMatchers("/main/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable()
                 .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
                 .defaultSuccessUrl("/")

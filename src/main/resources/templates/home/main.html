@@ -64,6 +64,7 @@
                         <span th:utext="${tour.endTime}"/></h6>
                     <p class="card-text"><span th:utext="${tour.description}"/></p>
                     <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Edit</a>
+                    <a th:onclick="'javascript:viewUser(\'' + ${tour.id} +'\');'" class="btn-floating waves-effect waves-light yellow"><i class="material-icons">visibility</i></a>
                 </div>
             </div>
         </div>
@@ -122,6 +123,54 @@
         </div>
     </form>
 </div>
+
+
+<div class="myForm2">
+    <form th:action="@{/}" method="post">
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div id="viewUser" class="modal modal-fixed-footer" th:fragment="view">
+                <div class="modal-content">
+                    <h4>View User</h4>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Title:</td>
+                                        <td th:text="${tour.title}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description:</td>
+                                        <td th:text="${tour.description}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td th:text="${tour.price}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-action modal-close waves-effect waves-light btn-floating red"><i
+                            class="material-icons">close</i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 
 </body>
 </html>
