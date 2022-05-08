@@ -2,7 +2,7 @@ package com.zaitsava.springboot_touristsite.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="tours")
+@Table(name="tour")
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

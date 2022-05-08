@@ -3,10 +3,12 @@
 <head>
     <title>Главная страница</title>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/images/js.js}" src="/static/images/js.js"></script>
+    <script type="text/javascript" th:src="@{/images/tourDetails.js}" src="/static/images/tourDetails.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
@@ -64,7 +66,8 @@
                         <span th:utext="${tour.endTime}"/></h6>
                     <p class="card-text"><span th:utext="${tour.description}"/></p>
                     <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Edit</a>
-                    <a th:onclick="'javascript:viewUser(\'' + ${tour.id} +'\');'" class="btn-floating waves-effect waves-light yellow"><i class="material-icons">visibility</i></a>
+                    <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary dBtn">Show</a>
+
                 </div>
             </div>
         </div>
@@ -89,7 +92,7 @@
 
                         <div class="form-group">
                             <label for="id" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="id" name="id" value=""/>
+                            <input type="text" class="form-control" id="id" name="id" value="" readonly/>
                         </div>
                         <div class="form-group">
                             <label for="title" class="col-form-label">Title:</label>
@@ -123,54 +126,57 @@
         </div>
     </form>
 </div>
-
-
 <div class="myForm2">
-    <form th:action="@{/}" method="post">
+    <form th:action="@{/save}" method="post">
         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabel"
+             aria-labelledby="exampleModalLabel2"
              aria-hidden="true">
-            <div id="viewUser" class="modal modal-fixed-footer" th:fragment="view">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <h4>View User</h4>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="row">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Title:</td>
-                                        <td th:text="${tour.title}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Description:</td>
-                                        <td th:text="${tour.description}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Price</td>
-                                        <td th:text="${tour.price}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Update tour or Create v2</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="id2" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id2" name="id2" value=""/>
                         </div>
+                        <div class="form-group">
+                            <label for="title2" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title2" name="title2" value=""  />
+                        </div>
+                        <div class="form-group">
+                            <label for="description2" class="col-form-label">description:</label>
+                            <input type="text" class="form-control" id="description2" name="description2" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime2" class="col-form-label">startTime:</label>
+                            <input type="text" class="form-control" id="startTime2" name="startTime2" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime2" class="col-form-label">endTime:</label>
+                            <input type="text" class="form-control" id="endTime2" name="endTime2" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price2" class="col-form-label">price:</label>
+                            <input type="text" class="form-control" id="price2" name="price2" value="" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="modal-action modal-close waves-effect waves-light btn-floating red"><i
-                            class="material-icons">close</i></button>
-                </div>
             </div>
+
         </div>
     </form>
 </div>
-
 
 </body>
 </html>
