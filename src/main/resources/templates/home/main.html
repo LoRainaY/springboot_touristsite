@@ -64,9 +64,11 @@
                     <h5 class="card-title"><span th:utext="${tour.title}"/></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><span th:utext="${tour.startTime}"/> по
                         <span th:utext="${tour.endTime}"/></h6>
-                    <p class="card-text"><span th:utext="${tour.description}"/></p>
+
                     <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Edit</a>
                     <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary dBtn">Show</a>
+                    <a class="btn btn-primary" data-th-href="@{/{tourId}(tourId=${tour.id})}"
+                       data-th-text="${tour.title}"></a>
 
                 </div>
             </div>
@@ -92,7 +94,7 @@
 
                         <div class="form-group">
                             <label for="id" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="id" name="id" value="" readonly/>
+                            <input type="text" class="form-control" id="id" name="id" value=""/>
                         </div>
                         <div class="form-group">
                             <label for="title" class="col-form-label">Title:</label>
@@ -117,6 +119,7 @@
 
                     </div>
                     <div class="modal-footer">
+
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-primary" value="Save or Create"/>
                     </div>
