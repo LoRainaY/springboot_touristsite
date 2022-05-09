@@ -1,14 +1,15 @@
 package com.zaitsava.springboot_touristsite.entity;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="tour")
+@Table(name = "tour")
 public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
     private int id;
-    @Column(name = "image")
+    @Column(name = "image", nullable = true)
     private String image;
     @Column(name = "title")
     private String title;
@@ -89,5 +90,13 @@ public class Tour {
                 ", endTime='" + endTime + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Transient
+    public String getImagePath() {
+        if (image == null || id == 0) {
+            return null;
+        }
+        return "/tour-image/" + id + "/" + image;
     }
 }

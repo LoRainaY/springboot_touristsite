@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -23,5 +26,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("user/login");
 
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        Path toutUploadDir= Paths.get("./tour-image/");
+        String tourUploadPath=toutUploadDir.toFile().getAbsolutePath();
+        registry.addResourceHandler("/tour-image/**").addResourceLocations("file:/"+tourUploadPath+"/");
     }
 }
