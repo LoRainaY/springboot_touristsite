@@ -8,6 +8,8 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "code")
     private int id;
+    @Column(name = "image")
+    private String image;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
@@ -26,6 +28,14 @@ public class Tour {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {

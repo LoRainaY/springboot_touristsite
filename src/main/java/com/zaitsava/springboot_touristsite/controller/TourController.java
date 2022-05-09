@@ -15,10 +15,16 @@ public class TourController {
     @Autowired
     private TourRepository tourRepository;
     @PostMapping("/save")
-    public String save(Tour tout) {
-        tourRepository.save(tout);
+    public String save(@ModelAttribute(name = "tour") Tour tour) {
+        tourRepository.save(tour);
         return "redirect:/";
     }
+    @PostMapping("admin/save")
+    public String saveTour(@ModelAttribute(name = "tour") Tour tour) {
+        tourRepository.save(tour);
+        return "/";
+    }
+
 
     @GetMapping("/findOne")
     @ResponseBody

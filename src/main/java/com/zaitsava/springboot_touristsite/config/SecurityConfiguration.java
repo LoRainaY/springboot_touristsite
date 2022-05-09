@@ -1,4 +1,5 @@
 package com.zaitsava.springboot_touristsite.config;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -37,13 +38,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("favicon.ico").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ADMIN')")
+               /* .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
                 .antMatchers("/main/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable()
                 .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
@@ -55,10 +56,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/")
                 .and().rememberMe()
                 .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(60*60)
+                .tokenValiditySeconds(60 * 60)
                 .and().exceptionHandling().accessDeniedPage("/access_denied");
 
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
