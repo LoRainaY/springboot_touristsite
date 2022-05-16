@@ -41,13 +41,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user/cart").authenticated()
+
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
+                .antMatchers("/home").permitAll()
                 .antMatchers("favicon.ico").permitAll()
                /* .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
-                .antMatchers("/main/**").hasAuthority("ADMIN").anyRequest()
-                .authenticated().and().csrf().disable()
+                .antMatchers("/main/**").permitAll()
+                .antMatchers("/user/cart").authenticated().and().csrf().disable()
                 .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")

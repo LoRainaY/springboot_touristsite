@@ -7,8 +7,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{/images/js.js}" src="/static/images/js.js"></script>
-    <script type="text/javascript" th:src="@{/images/tourDetails.js}" src="/static/images/tourDetails.js"></script>
+    <script type="text/javascript" th:src="@{/js/js.js}" src="/static/js/js.js"></script>
+    <script type="text/javascript" th:src="@{/js/tourDetails.js}" src="/static/js/tourDetails.js"></script>
+    <script type="text/javascript" th:src="@{/js/quantity_control.js.js}" src="/static/js/quantity_control.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
     <meta charset="UTF-8"/>
@@ -65,6 +66,11 @@
     <h1 data-th-text="${product.title}"></h1>
     <p>Дата: <span id="startTime" data-th-text="${product.startTime}"/> по <span id="endTime" data-th-text="${product.endTime}"/></p>
     <section id="description" data-th-text="${product.description}"></section>
+
+    <div th:replace="quantity_control::quantity_control(1,@{${product.id}})">Количество</div>
+    <div>
+        <button class="btn btn-danger" id="buttonAdd2Cart">Добавить в корзину</button>
+    </div>
 
 
 </div>

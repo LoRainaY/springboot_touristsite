@@ -27,7 +27,7 @@ public class ShoppingCartTests {
 
     @Test
     public void testAddOneCartItem(){
-       Tour tour=entityManager.find(Tour.class,1);
+       Tour tour=entityManager.find(Tour.class,10);
        User user=entityManager.find(User.class,4);
 
         CartItem newCartItem=new CartItem();
