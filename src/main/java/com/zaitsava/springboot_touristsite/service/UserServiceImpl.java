@@ -32,6 +32,12 @@ public class UserServiceImpl implements UserService {
     public User findByPhone(String phone) {
         return userRepository.findByPhone(phone);
     }
+
+    @Override
+    public User findById(Integer id) {
+        return userRepository.findById(id);
+    }
+
     @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

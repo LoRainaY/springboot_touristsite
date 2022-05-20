@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Корзина</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/quantity_control.js}" src="/static/js/quantity_control.js"></script>
+    <script type="text/javascript" th:src="@{/js/tourDetails.js}" src="/static/js/tourDetails.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
+
+</head>
+<body>
+<div th:fragment="navibar">
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Туристический сайт</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
+                    <span th:case="${false}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                         </li></span>
+                    <span th:case="${true}">
+                        <li class="nav-item">
+                         <a class="nav-link" href="/logout">Logout</a>
+                          </li>
+                    </span>
+
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+<div th:fragment="quantity_control(qtyValue,tourId)">
+    <nav>
+        <div class="pagination">
+            <li class="page-item">
+                <a class="page-link minusButton" href="" th:pid="${tourId}"><b>-</b></a>
+            </li>
+            <li class="page-item">
+                <input type="text" th:value="${qtyValue}" class="form-control text-center"
+                       onkeydown="return false;" style="max-width: 55px"
+                       th:id="'quantity'+${tourId}"/>
+            </li>
+            <li class="page-item">
+                <a class="page-link plusButton" href="" th:pid="${tourId}"><b>+</b></a>
+            </li>
+        </div>
+    </nav>
+
+</div>
+<div th:fragment="succes_modal" class="modal fade text-center" id="cartModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Внимание</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span id="modalBody"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="myForm3" th:fragment="modalForChangeTour">
+
+    <form th:action="@{/admin/saveTour}" method="post">
+        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel3"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel3">Update tour or Create</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="id3" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id3" name="id3" value=""/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title3" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title3" name="titl3" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description3" class="col-form-label">description:</label>
+                            <input type="text" class="form-control" id="description3" name="description3" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime3" class="col-form-label">startTime:</label>
+                            <input type="text" class="form-control" id="startTime3" name="startTime3" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime3" class="col-form-label">endTime:</label>
+                            <input type="text" class="form-control" id="endTime3" name="endTime3" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price3" class="col-form-label">price:</label>
+                            <input type="text" class="form-control" id="price3" name="price3" value=""/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="modalBeforeDelete" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="modalBeforeDelete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="alert alert-danger">Вы уверены, что хотите удалить выбранный тур?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="" class="btn btn-danger" id="delRef">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

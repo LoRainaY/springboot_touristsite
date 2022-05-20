@@ -20,10 +20,14 @@ public class MainController {
     private TourRepository tourRepository;
 
     @GetMapping("/")
-    public String mainPage(Model model) {
-
+    public String mainPageShowTours(Model model) {
         model.addAttribute("tours",tourRepository.findAll());
         return "home/main";
+    }
+    @GetMapping("/admin/tourList")
+    public String adminPageShowTours(Model model) {
+        model.addAttribute("tours",tourRepository.findAll());
+        return "admin/tourList";
     }
     @RequestMapping("/main")
     public String main() {

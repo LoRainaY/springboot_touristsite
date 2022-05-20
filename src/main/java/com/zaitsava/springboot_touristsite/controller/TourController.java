@@ -28,6 +28,16 @@ public class TourController {
         tourRepository.save(tour);
         return "redirect:/";
     }
+    @PostMapping("/admin/saveTour")
+    public String saveTourInModal(@ModelAttribute(name = "tour") Tour tour) {
+        tourRepository.save(tour);
+        return "redirect:/admin/tourList";
+    }
+    @GetMapping("/delete")
+    public String deleteTour(Integer id) {
+        tourRepository.deleteById(id);
+        return "redirect:/";
+    }
 
     @PostMapping("/admin/save")
     public String saveTour(@ModelAttribute(name = "tour") Tour tour,
@@ -54,11 +64,21 @@ public class TourController {
 
         return "admin/adminPage";
     }
+    @PostMapping("/admin/delete")
+    public String deleteTourInModal(@ModelAttribute(name = "tour") Tour tour) {
+        tourRepository.delete(tour);
+        return "redirect:/admin/tourList";
+    }
 
 
     @GetMapping("/findOne")
     @ResponseBody
     public Tour findOne(Integer id) {
+        return tourRepository.findById(id).get();
+    }
+    @GetMapping("/admin/findOne")
+    @ResponseBody
+    public Tour findOne2(Integer id) {
         return tourRepository.findById(id).get();
     }
 

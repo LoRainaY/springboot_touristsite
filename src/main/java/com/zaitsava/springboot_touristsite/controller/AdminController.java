@@ -19,7 +19,7 @@ public class AdminController {
 
 
     @RequestMapping("admin/createTour")
-    public ModelAndView createTour(){
+    public ModelAndView goToPageOfCreatingTour(){
         ModelAndView adminPage = new ModelAndView();
         Tour tour=new Tour();
         adminPage.setViewName("admin/addTour");

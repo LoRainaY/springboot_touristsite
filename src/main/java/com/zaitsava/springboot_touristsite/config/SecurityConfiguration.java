@@ -39,27 +39,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-
-                .antMatchers("/login").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/home").permitAll()
-                .antMatchers("favicon.ico").permitAll()
-               /* .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
-                .antMatchers("/main/**").permitAll()
-                .antMatchers("/user/cart").authenticated().and().csrf().disable()
-                .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
-                .defaultSuccessUrl("/")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .and().rememberMe()
-                .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(60 * 60)
-                .and().exceptionHandling().accessDeniedPage("/access_denied");
+        http.
+                authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/login").permitAll()
+                    .antMatchers("/signup").permitAll()
+                    .antMatchers("/home").permitAll()
+                    .antMatchers("favicon.ico").permitAll()
+                    /* .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
+                    .antMatchers("/main/**").permitAll()
+                    .antMatchers("/user/cart").authenticated()
+                .and()
+                    .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
+                    .defaultSuccessUrl("/")
+                    .usernameParameter("email")
+                    .passwordParameter("password")
+                .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/")
+                .and()
+                    .rememberMe()
+                    .tokenRepository(persistentTokenRepository())
+                    .tokenValiditySeconds(60 * 60)
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/access_denied");
 
     }
 
@@ -67,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/images/**")
-                .antMatchers("/fonts/**");
+                .antMatchers("/js/**");
     }
 
     @Bean

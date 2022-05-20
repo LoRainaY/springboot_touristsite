@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Страница администратора</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/js.js}" src="/static/js/js.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
+
+</head>
+<body>
+<div th:replace="fragments::navibar">Navigation menu</div>
+<div class="container mt-4">
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Управление</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tour,iter:${tours}">
+            <th scope="row" th:utext="${tour.id}"></th>
+            <td th:utext="${tour.title}"></td>
+            <td th:utext="${tour.description}"></td>
+            <td><span th:utext="${tour.startTime}"/> по
+                <span th:utext="${tour.endTime}"/></td>
+            <td th:utext="${tour.price}"></td>
+            <td><a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary qBtn">Edit</a>
+                <a th:href="@{delete/(id=${tour.id})}" class="btn btn-danger delBtn" >Delete</a></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="fragments::modalForChangeTour">Modal</div>
+<div th:replace="fragments::modalBeforeDelete">Modal</div>
+<script>
+    $(document).ready(function () {
+        $('.table .qBtn').on('click', function (event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            var text = $(this).text();
+            if (text=='Edit') {
+                $.get(href, function (tour, status) {
+                    $('.myForm3 #id3').val(tour.id);
+                    $('.myForm3 #title3').val(tour.title);
+                    $('.myForm3 #description3').val(tour.description);
+                    $('.myForm3 #startTime3').val(tour.startTime);
+                    $('.myForm3 #endTime3').val(tour.endTime);
+                    $('.myForm3 #price3').val(tour.price);
+                });
+
+                $('.myForm3 #exampleModal3').modal();
+            } else {
+
+                $('.myForm3 #id3').val('');
+                $('.myForm3 #title3').val('');
+                $('.myForm3 #description3').val('');
+                $('.myForm3 #startTime3').val('');
+                $('.myForm3 #endTime3').val('');
+                $('.myForm3 #price3').val('');
+                $('.myForm3 #exampleModal3').modal();
+            }
+        });
+        $('.table .delBtn').on('click', function (event) {
+            event.preventDefault();
+            var href = $(this).attr('href');
+            $('#modalBeforeDelete #delRef').attr('href', href);
+            $('#modalBeforeDelete').modal();
+        });
+    });
+
+</script>
+</body>
+</html>
