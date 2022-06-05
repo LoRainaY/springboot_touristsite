@@ -46,9 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .antMatchers("/signup").permitAll()
                     .antMatchers("/home").permitAll()
                     .antMatchers("favicon.ico").permitAll()
-                    /* .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
+                    .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .antMatchers("/main/**").permitAll()
-                    .antMatchers("/user/cart").authenticated()
+                .antMatchers("/user/cart").authenticated()
                 .and()
                     .formLogin().loginPage("/login").permitAll().failureUrl("/login?error=true")
                     .defaultSuccessUrl("/")

@@ -10,9 +10,13 @@ function addToCart() {
     $.ajax({
         type: "POST",
         url: url,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(csrfHeaderName, csrfValue);
-        }
+        headers: {
+            'X-CSRF-TOKEN':csrfValue,
+            'Content-Type':'application/json'
+        },
+        // beforeSend: function (xhr) {
+        //     xhr.setRequestHeader(csrfHeaderName, csrfValue);
+        // }
     }).done(function (response) {
       $("#modalTitle").text("Корзина");
       $("#modalBody").text(response);

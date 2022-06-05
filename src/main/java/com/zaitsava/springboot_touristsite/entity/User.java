@@ -32,6 +32,16 @@ public class User {
     @Column(name = "active")
     private int active;
 
+    private boolean getBonus;
+
+    public boolean isGetBonus() {
+        return getBonus;
+    }
+
+    public void setGetBonus(boolean getBonus) {
+        this.getBonus = getBonus;
+    }
+
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"),
             inverseJoinColumns=@JoinColumn(name="role_id"))
@@ -105,7 +115,6 @@ public class User {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Set<Role> roles) {this.roles = roles;
     }
 }

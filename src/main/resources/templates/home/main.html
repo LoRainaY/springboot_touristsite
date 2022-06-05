@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Главная страница</title>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -27,8 +28,8 @@
                     <h6 class="card-subtitle mb-2 text-muted"><span th:utext="${tour.startTime}"/> по
                         <span th:utext="${tour.endTime}"/></h6>
 
-                    <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Edit</a>
-
+                    <a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn"
+                       sec:authorize="hasAuthority('ADMIN')">Редактировать тур</a>
 
                 </div>
             </div>

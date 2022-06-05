@@ -2,12 +2,10 @@ package com.zaitsava.springboot_touristsite.controller;
 
 
 import com.zaitsava.springboot_touristsite.entity.CartItem;
-import com.zaitsava.springboot_touristsite.entity.CurrentUser;
 import com.zaitsava.springboot_touristsite.entity.User;
 import com.zaitsava.springboot_touristsite.service.ShoppingCartService;
 import com.zaitsava.springboot_touristsite.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

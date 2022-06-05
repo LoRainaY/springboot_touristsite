@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 public class ShoppingCartRestController {
     @Autowired
@@ -34,4 +35,5 @@ public class ShoppingCartRestController {
         Integer addedQuantity=cartService.addTour(tourId,quantity,user);
         return addedQuantity+" шт. тура были добавлены в вашу корзину.";
     }
+
 }

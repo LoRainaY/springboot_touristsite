@@ -29,17 +29,16 @@
                     </div>
                     <div class="col-3">
                         <img th:src="@{${tour.imagePath}}" class="img-fluid" width="350" height="350"/>
-
                     </div>
                     <div class="col-6">
                         <b><a data-th-href="@{/{tourId}(tourId=${tour.id})}"
                               data-th-text="${tour.title}" target="_blank">
                         </a></b>
-                        <div th:replace="fragments::quantity_control(${item.quantity},${item.tour.id})">Количество</div>
+                        <div id="quantity1"  th:replace="fragments::quantity_control(${item.quantity},${item.tour.id})">Количество</div>
                         <div>
                             <span>x</span>
-                            <span>[[${tour.price}]]</span>
-                            <span>=</span><span class="h4">[Итого]</span>
+                            <span th:id="'price' + ${item.tour.id}">[[${tour.price}]]</span>
+                            <span>=</span> <span th:text="${item.tour.price*item.quantity}" th:id="'result' + ${item.tour.id}" class="h4"></span>
                         </div>
                     </div>
                 </div>
@@ -52,10 +51,7 @@
                     <span class="h3 ml-3">Итоговая стоимость</span>
                 </div>
                 <div class="mt-2 ml-3">
-                    <span class="h2">[Total Amount]</span>
-                </div>
-                <div class="mt-2 ml-3">
-                    <button class="btn btn-danger p-3 mt-2">Проверить</button>
+                    <span id="total" class="h2">[Total Amount]</span>
                 </div>
             </div>
         </div>
@@ -64,5 +60,73 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    const csrfValue = "[[${_csrf.token}]]";
+
+    let counter=0;
+
+    let count=1;
+
+    function decrease(id){
+        count--;
+        const total=document.getElementById("total");
+        const price=document.getElementById("price"+id);
+        const result=document.getElementById("result"+id);
+        if(parseInt(result.innerText)<=0){
+            return;
+        }
+        else {
+            const value=parseInt(result.textContent)-parseInt(price.textContent);
+            result.innerHTML=value.toString();
+            counter-=parseInt(price.innerText);
+            // total.innerHTML=counter.toString();
+        }
+
+    }
+
+    function increase(id) {
+        count++;
+        const total=document.getElementById("total");
+        const price=document.getElementById("price"+id);
+        const result=document.getElementById("result"+id);
+        const value=parseInt(result.textContent)+parseInt(price.textContent);
+        counter+=parseInt(price.innerText);
+        result.innerHTML=value.toString();
+
+        // total.innerHTML=counter.toString();
+
+    }
+
+
+    function send(tourId){
+        let price=0;
+        const cost=document.getElementById("price"+tourId);
+        let result=document.getElementById("result"+tourId);
+        const quantity=document.getElementById("quantity"+tourId);
+        if(parseInt(quantity.value)>=2){
+           price=parseInt(result.innerText)-(parseInt(result.innerText)*(10/100));
+        }
+        else {
+            price=parseInt(cost.innerText)
+            // price=parseInt(result.innerText)+parseInt(cost.innerText);
+        }
+
+        console.log(price);
+
+        fetch('http://localhost:8080/order', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN':csrfValue,
+            },
+            body: JSON.stringify({tourId: tourId,count:quantity.value,discountPrice:price})
+        });
+    }
+
+</script>
 </body>
 </html>
