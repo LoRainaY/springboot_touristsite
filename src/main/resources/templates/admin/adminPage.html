@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="ru">
 <head>
     <title>Страница администратора</title>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -15,9 +15,12 @@
 <div th:replace="fragments::navibar">Navigation menu</div>
 <div class="container">
     <h6>Это панель администратора</h6>
-
-<a href="admin/createTour" class="btn btn-primary">Добавить тур</a>
-<a href="admin/tourList" class="btn btn-primary">Управление турами</a>
+    <div class="panel">
+        <a href="admin/createTour" class="btn btn-primary">Добавить тур</a>
+        <a href="admin/orders" class="btn btn-primary">Список бронирований</a>
+        <a href="admin/tourList" class="btn btn-primary">Управление турами</a>
+        <a href="admin/userList" class="btn btn-primary">Список пользователей</a>
+    </div>
 </div>
 </body>
 </html>

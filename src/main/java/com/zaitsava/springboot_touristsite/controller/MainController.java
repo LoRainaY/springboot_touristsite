@@ -24,11 +24,7 @@ public class MainController {
         model.addAttribute("tours",tourRepository.findAll());
         return "home/main";
     }
-    @GetMapping("/admin/tourList")
-    public String adminPageShowTours(Model model) {
-        model.addAttribute("tours",tourRepository.findAll());
-        return "admin/tourList";
-    }
+
     @RequestMapping("/main")
     public String main() {
 

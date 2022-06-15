@@ -34,24 +34,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">О нас</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/profile">Профиль</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                     <a class="nav-link" href="/admin">Админ панель</a>
                 </li>
-                <div th:switch="${#authentication}? ${#authorization.expression('isAuthenticated()')} : ${false}">
-                    <span th:case="${false}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Войти</a>
-                         </li></span>
-                    <span th:case="${true}">
-                        <li class="nav-item">
-                         <a class="nav-link" href="/logout">Выйти</a>
-                          </li>
-                    </span>
-
-                </div>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Выйти</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Войти</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -92,11 +86,69 @@
                 <span id="modalBody"></span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal"></button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Ок</button>
             </div>
         </div>
     </div>
 </div>
+<div class="myForm" th:fragment="modalForChangeTourInMain">
+    <form th:action="@{/save}" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Update tour or Create</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id" name="id" value=""/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title" name="title" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">description:</label>
+                            <input type="text" class="form-control" id="description" name="description" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime" class="col-form-label">startTime:</label>
+                            <input type="text" class="form-control" id="startTime" name="startTime" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime" class="col-form-label">endTime:</label>
+                            <input type="text" class="form-control" id="endTime" name="endTime" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-form-label">price:</label>
+                            <input type="text" class="form-control" id="price" name="price" value=""/>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
 <div class="myForm3" th:fragment="modalForChangeTour">
 
     <form th:action="@{/admin/saveTour}" method="post">
@@ -106,7 +158,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel3">Update tour or Create</h5>
+                        <h5 class="modal-title" id="exampleModalLabel3">Update tour or Create3</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -120,7 +172,7 @@
 
                         <div class="form-group">
                             <label for="title3" class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="title3" name="titl3" value=""/>
+                            <input type="text" class="form-control" id="title3" name="title3" value=""/>
                         </div>
                         <div class="form-group">
                             <label for="description3" class="col-form-label">description:</label>

@@ -40,6 +40,17 @@ public class Order {
     private Integer discountPrice;
 
 
+    @PrePersist
+    public void prePersist() {
+        this.date = LocalDateTime.now();
+    }
+
+
+    @CreatedDate
+    @Column(name = "date")
+    private LocalDateTime date;
+
+
     public Integer getDiscountPrice() {
         return discountPrice;
     }
@@ -66,16 +77,6 @@ public class Order {
 
     private Integer count;
 
-
-    @PrePersist
-    public void prePersist() {
-        this.date = LocalDateTime.now();
-    }
-
-
-    @CreatedDate
-    @Column(name = "date")
-    private LocalDateTime date;
 
 
     public long getId() {

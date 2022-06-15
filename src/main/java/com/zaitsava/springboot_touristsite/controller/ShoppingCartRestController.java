@@ -28,7 +28,7 @@ public class ShoppingCartRestController {
         System.out.println("tourId"+tourId+"- quantity"+quantity+"-"+authentication.toString());
         if(authentication==null||authentication instanceof AnonymousAuthenticationToken){
             System.out.println("authentication is null");
-            return "Ваш нужно войти чтобы добавить этот тур в вашу корзину";
+            return "Ваш нужно войти чтобы добавить этот тур в вашу корзину либо заказать тур по телефону";
         }
         User user = userService.findUserByEmail(authentication.getName());
         if(user==null) System.out.println("User is null");

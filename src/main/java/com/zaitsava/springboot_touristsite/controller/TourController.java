@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -32,11 +33,6 @@ public class TourController {
     public String saveTourInModal(@ModelAttribute(name = "tour") Tour tour) {
         tourRepository.save(tour);
         return "redirect:/admin/tourList";
-    }
-    @GetMapping("/delete")
-    public String deleteTour(Integer id) {
-        tourRepository.deleteById(id);
-        return "redirect:/";
     }
 
     @PostMapping("/admin/save")
@@ -69,7 +65,11 @@ public class TourController {
         tourRepository.delete(tour);
         return "redirect:/admin/tourList";
     }
-
+/*    @PostMapping("/delete")
+    public String deleteTour(Integer id ){
+        tourRepository.deleteTourById(id);
+        return "redirect:/tourList";
+    }*/
 
     @GetMapping("/findOne")
     @ResponseBody

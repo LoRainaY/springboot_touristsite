@@ -3,7 +3,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
-        if (text=='Edit') {
+        if (text=='Редактировать тур') {
             $.get(href, function (tour, status) {
                 $('.myForm #id').val(tour.id);
                 $('.myForm #title').val(tour.title);

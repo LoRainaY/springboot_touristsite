@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Список пользователей</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/js.js}" src="/static/js/js.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
+
+</head>
+<body>
+<div th:replace="fragments::navibar">Navigation menu</div>
+<div class="container mt-4">
+
+    <table class="table table-hover text-center" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Эл.почта</th>
+            <th scope="col">Бонус</th>
+            <th scope="col">Управление</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user,iter:${users}">
+            <th scope="row" th:utext="${user.id}"></th>
+            <td th:utext="${user.lastname}"></td>
+            <td th:utext="${user.firstname}"></td>
+            <td th:utext="${user.patronymic}"></td>
+            <td th:utext="${user.phone}"></td>
+            <td th:utext="${user.email}"></td>
+            <td th:utext="${user.isGetBonus()}"></td>
+            <td><a th:href="@{findOne/(id=${user.id})}" class="btn btn-primary qBtn">Edit</a>
+
+                <button  th:onclick="'remove(' + ${user.id} + ')'" class="btn mx-3 btn-danger delBtn" >Delete</button></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

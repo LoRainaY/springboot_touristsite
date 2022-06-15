@@ -3,7 +3,7 @@ package com.zaitsava.springboot_touristsite.controller;
 
 import javax.validation.Valid;
 
-import com.zaitsava.springboot_touristsite.entity.Role;
+import com.zaitsava.springboot_touristsite.entity.Tour;
 import com.zaitsava.springboot_touristsite.entity.User;
 import com.zaitsava.springboot_touristsite.repository.UserRepository;
 import com.zaitsava.springboot_touristsite.service.UserService;
@@ -12,11 +12,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,7 +65,7 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
 
-        model.addObject("userName", "Добрый день,"+user.getFirstname() + " " + user.getLastname()+" "+user.getPatronymic());
+       // model.addObject("userName", "Добрый день,"+user.getFirstname() + " " + user.getLastname()+" "+user.getPatronymic());
         model.setViewName("redirect:/");
         return model;
     }
@@ -76,4 +76,15 @@ public class UserController {
         model.setViewName("errors/access_denied");
         return model;
     }
-}
+    @GetMapping("/profile")
+        public ModelAndView profile() {
+            ModelAndView model = new ModelAndView();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByEmail(auth.getName());
+            model.addObject("user", user);
+            model.setViewName("user/profile");
+        return model;
+    }
+
+
+    }
