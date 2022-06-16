@@ -27,7 +27,7 @@ public class TourController {
     @PostMapping("/save")
     public String save(@ModelAttribute(name = "tour") Tour tour) {
         tourRepository.save(tour);
-        return "redirect:/";
+        return "redirect:/admin/tourList";
     }
     @PostMapping("/admin/saveTour")
     public String saveTourInModal(@ModelAttribute(name = "tour") Tour tour) {
@@ -60,18 +60,19 @@ public class TourController {
 
         return "admin/adminPage";
     }
-    @PostMapping("/admin/delete")
+/*    @PostMapping("/admin/delete")
     public String deleteTourInModal(@ModelAttribute(name = "tour") Tour tour) {
         tourRepository.delete(tour);
         return "redirect:/admin/tourList";
-    }
-/*    @PostMapping("/delete")
-    public String deleteTour(Integer id ){
-        tourRepository.deleteTourById(id);
-        return "redirect:/tourList";
     }*/
+    @GetMapping("/delete")
+    public String deleteTour(Integer id) {
+        tourRepository.deleteById(id);
+        return "redirect:/admin/tourList";
+    }
 
-    @GetMapping("/findOne")
+
+    @GetMapping("/findOne") //for main page
     @ResponseBody
     public Tour findOne(Integer id) {
         return tourRepository.findById(id).get();
@@ -81,13 +82,6 @@ public class TourController {
     public Tour findOne2(Integer id) {
         return tourRepository.findById(id).get();
     }
-
-    /* @RequestMapping(value = "/{id}")
-     public String view(@PathVariable("id") Integer id, ModelMap modelMap) {
-         Tour tour = tourRepository.findById(id).get();
-         modelMap.addAttribute("tours", tour);
-         return "/ :: view";
-     }*/
     @GetMapping("{productId}")
     public ModelAndView product(@PathVariable Integer productId) {
         return this.tourRepository.findById(productId)

@@ -144,14 +144,76 @@
         </div>
     </form>
 </div>
+<div class="userForm" th:fragment="modalForChangeUser">
+    <form th:action="@{/changeUser}" method="post">
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Редактирование пользователя</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="idU" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="idU" name="idU" value=""/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-form-label">firstname:</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname" class="col-form-label">lastname:</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="patronymic" class="col-form-label">patronymic:</label>
+                            <input type="text" class="form-control" id="patronymic" name="patronymic" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-form-label">endTime:</label>
+                            <input type="text" class="form-control" id="email" name="email" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-form-label"> phone:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label"> password:</label>
+                            <input type="password" class="form-control" id="password" name="password" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="bonus" class="col-form-label"> bonus:</label>
+                            <input type="text" class="form-control" id="bonus" name="bonus" value=""/>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label for="active" class="col-form-label"> bonus:</label>
+                            <input type="text" class="form-control" id="active" name="active" value=""/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
 
 
-
-
+<!--
 
 <div class="myForm3" th:fragment="modalForChangeTour">
 
-    <form th:action="@{/admin/saveTour}" method="post">
+    <form th:action="@{/save}" method="post">
         <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel3"
              aria-hidden="true">
@@ -202,7 +264,7 @@
 
         </div>
     </form>
-</div>
+</div>-->
 <div class="modal fade" id="modalBeforeDelete" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true" th:fragment="modalBeforeDelete">
     <div class="modal-dialog" role="document">

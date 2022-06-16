@@ -28,10 +28,31 @@
 
 
     <h1 data-th-text="${product.title}"></h1>
+
     <section>Дата: <span id="startTime" data-th-text="${product.startTime}"/> по
         <span id="endTime" data-th-text="${product.endTime}"/></section>
-    <section>Описание: <span id="description" data-th-text="${product.description}"></span></p></section>
+
+    <section>Описание: <span id="description" data-th-text="${product.description}"></span></section>
+
     <section>Цена: <span id="price" data-th-text="${product.price}"></span></section>
+
+    <section th:if="${product.firstDayDescription != null}">Первый день:
+        <span id="firstDayDescription" data-th-text="${product.firstDayDescription}"></span></section>
+
+    <section th:if="${product.secondDayDescription != null}">Второй день:
+        <span id="secondDayDescription" data-th-text="${product.secondDayDescription}"></span></section>
+
+    <section th:if="${product.thirdDayDescription != null}">Третий день:
+        <span id="thirdDayDescription" data-th-text="${product.thirdDayDescription}"></span></section>
+
+    <section th:if="${product.fourthDayDescription != null}">Четвертый день:
+        <span id="fourthDayDescription" data-th-text="${product.fourthDayDescription}"></span></section>
+
+    <section th:if="${product.includeInPrice != null}">В стоимость входит:
+        <span id="includeInPrice" data-th-text="${product.includeInPrice}"></span></section>
+
+    <section th:if="${product.additionally != null}">Дополнительно оплачивается:
+        <span id="additionally" data-th-text="${product.additionally}"></span></section>
     Количество человек:
     <div th:replace="fragments::quantity_control(1,${product.id})">Количество</div>
 

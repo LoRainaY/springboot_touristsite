@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -41,6 +42,11 @@ public class AdminController {
     public String adminPageShowTours(Model model) {
         model.addAttribute("tours",tourRepository.findAll());
         return "admin/tourList";
+    }
+    @GetMapping("/admin/findOneUser")
+    @ResponseBody
+    public User findOneUser(Integer id) {
+        return userRepository.findById(id);
     }
 
 

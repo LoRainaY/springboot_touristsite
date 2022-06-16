@@ -7,6 +7,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/openModal.js}" src="/static/js/openModal.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
@@ -35,7 +36,8 @@
             <td><span th:utext="${tour.startTime}"/> по
                 <span th:utext="${tour.endTime}"/></td>
             <td th:utext="${tour.price}"></td>
-            <td><a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary qBtn">Edit</a>
+            <td><a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Редактировать тур</a>
+            <td><a th:href="@{delete/(id=${tour.id})}" class="btn mx-3 btn-danger delBtn">Deleteтур</a>
 
                 <button  th:onclick="'remove(' + ${tour.id} + ')'" class="btn mx-3 btn-danger delBtn" >Delete</button></td>
 
@@ -44,55 +46,55 @@
         </tbody>
     </table>
 </div>
-<div th:replace="fragments::modalForChangeTour">Navigation menu</div>
+<div th:replace="fragments::modalForChangeTourInMain">menu</div>
 <div th:replace="fragments::modalBeforeDelete">Modal</div>
 <script>
-    $(document).ready(function () {
-        $('table .qBtn').on('click', function (event) {
-            event.preventDefault();
-            var href = $(this).attr('href');
-            var text = $(this).text();
-            if (text=='Edit') {
-                $.get(href, function (tour, status) {
-                    $('.myForm3 #id3').val(tour.id);
-                    $('.myForm3 #title3').val(tour.title);
-                    $('.myForm3 #description3').val(tour.description);
-                    $('.myForm3 #startTime3').val(tour.startTime);
-                    $('.myForm3 #endTime3').val(tour.endTime);
-                    $('.myForm3 #price3').val(tour.price);
-                });
+    /*   $(document).ready(function () {
+           $('table .qBtn').on('click', function (event) {
+               event.preventDefault();
+               var href = $(this).attr('href');
+               var text = $(this).text();
+               if (text=='Edit') {
+                   $.get(href, function (tour, status) {
+                       $('.myForm3 #id3').val(tour.id);
+                       $('.myForm3 #title3').val(tour.title);
+                       $('.myForm3 #description3').val(tour.description);
+                       $('.myForm3 #startTime3').val(tour.startTime);
+                       $('.myForm3 #endTime3').val(tour.endTime);
+                       $('.myForm3 #price3').val(tour.price);
+                   });
 
-                $('.myForm3 #exampleModal3').modal();
-            } else {
+                   $('.myForm3 #exampleModal3').modal();
+               } else {
 
-                $('.myForm3 #id3').val('');
-                $('.myForm3 #title3').val('');
-                $('.myForm3 #description3').val('');
-                $('.myForm3 #startTime3').val('');
-                $('.myForm3 #endTime3').val('');
-                $('.myForm3 #price3').val('');
-                $('.myForm3 #exampleModal3').modal();
-            }
-        });
-        $('.table .delBtn').on('click', function (event) {
-            event.preventDefault();
-            var href = $(this).attr('href');
-            $('#modalBeforeDelete #delRef').attr('href', href);
-            $('#modalBeforeDelete').modal();
-        });
-    });
-    function remove(id) {
-        console.log(id);
-        fetch('http://localhost:8080/admin/tour/remove/'+id, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN':csrfValue,
-            },
-        });
-    }
-
+                   $('.myForm3 #id3').val('');
+                   $('.myForm3 #title3').val('');
+                   $('.myForm3 #description3').val('');
+                   $('.myForm3 #startTime3').val('');
+                   $('.myForm3 #endTime3').val('');
+                   $('.myForm3 #price3').val('');
+                   $('.myForm3 #exampleModal3').modal();
+               }
+           });
+           $('.table .delBtn').on('click', function (event) {
+               event.preventDefault();
+               var href = $(this).attr('href');
+               $('#modalBeforeDelete #delRef').attr('href', href);
+               $('#modalBeforeDelete').modal();
+           });
+       });
+       function remove(id) {
+           console.log(id);
+           fetch('http://localhost:8080/admin/tour/remove/'+id, {
+               method: 'POST',
+               headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json',
+                   'X-CSRF-TOKEN':csrfValue,
+               },
+           });
+       }
+   */
 </script>
 
 </body>

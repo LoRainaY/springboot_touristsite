@@ -3,20 +3,27 @@ package com.zaitsava.springboot_touristsite.controller;
 
 import javax.validation.Valid;
 
+import com.zaitsava.springboot_touristsite.entity.Role;
 import com.zaitsava.springboot_touristsite.entity.Tour;
 import com.zaitsava.springboot_touristsite.entity.User;
+import com.zaitsava.springboot_touristsite.repository.RoleRepository;
 import com.zaitsava.springboot_touristsite.repository.UserRepository;
 import com.zaitsava.springboot_touristsite.service.UserService;
+import com.zaitsava.springboot_touristsite.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -27,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+
 
 
     @GetMapping("/signup")
@@ -36,6 +46,27 @@ public class UserController {
         model.addObject("user", user);
         model.setViewName("user/signup");
         return model;
+    }
+    @PostMapping("/changeUser")
+    public String change(@ModelAttribute(name = "user") User user, @RequestParam("idU")Integer id,
+                         @RequestParam("firstname")String firstName,
+                         @RequestParam("lastname")String lastName,
+                         @RequestParam("patronymic")String patronymic,
+                         @RequestParam("email")String email,
+                         @RequestParam("phone")String phone,
+                         @RequestParam("bonus") String string) {
+        user=userRepository.findById(id);
+        user.setFirstname(firstName);
+        user.setLastname(lastName);
+        user.setPatronymic(patronymic);
+        user.setEmail(email);
+        user.setPhone(phone);
+        System.out.println("Bonus "+string);
+        if(string.equals("true"))
+        user.setGetBonus(true);
+
+        userRepository.save(user);
+        return "redirect:admin/userList";
     }
 
     @PostMapping("/signup")

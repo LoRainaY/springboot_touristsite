@@ -21,6 +21,18 @@ public class Tour {
     private String endTime;
     @Column(name = "price")
     private double price;
+    @Column(name = "first_day")
+    private String firstDayDescription;
+    @Column(name = "second_day")
+    private String secondDayDescription;
+    @Column(name = "third_day")
+    private String thirdDayDescription;
+    @Column(name = "fourth_day")
+    private String fourthDayDescription;
+    @Column(name = "included_in_price")
+    private String includeInPrice;
+    @Column(name = "additionally")
+    private String additionally;
 
 
     public int getId() {
@@ -80,15 +92,70 @@ public class Tour {
         this.endTime = endTime;
     }
 
+    public String getFirstDayDescription() {
+        return firstDayDescription;
+    }
+
+    public void setFirstDayDescription(String firstDayDescription) {
+        this.firstDayDescription = firstDayDescription;
+    }
+
+    public String getSecondDayDescription() {
+        return secondDayDescription;
+    }
+
+    public void setSecondDayDescription(String secondDayDescription) {
+        this.secondDayDescription = secondDayDescription;
+    }
+
+    public String getThirdDayDescription() {
+        return thirdDayDescription;
+    }
+
+    public void setThirdDayDescription(String thirdDayDescription) {
+        this.thirdDayDescription = thirdDayDescription;
+    }
+
+    public String getFourthDayDescription() {
+        return fourthDayDescription;
+    }
+
+    public void setFourthDayDescription(String fourthDayDescription) {
+        this.fourthDayDescription = fourthDayDescription;
+    }
+
+    public String getIncludeInPrice() {
+        return includeInPrice;
+    }
+
+    public void setIncludeInPrice(String includeInPrice) {
+        this.includeInPrice = includeInPrice;
+    }
+
+    public String getAdditionally() {
+        return additionally;
+    }
+
+    public void setAdditionally(String additionally) {
+        this.additionally = additionally;
+    }
+
     @Override
     public String toString() {
         return "Tour{" +
                 "id=" + id +
+                ", image='" + image + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
                 ", price=" + price +
+                ", firstDayDescription='" + firstDayDescription + '\'' +
+                ", secondDayDescription='" + secondDayDescription + '\'' +
+                ", thirdDayDescription='" + thirdDayDescription + '\'' +
+                ", fourthDayDescription='" + fourthDayDescription + '\'' +
+                ", includeInPrice='" + includeInPrice + '\'' +
+                ", additionally='" + additionally + '\'' +
                 '}';
     }
 
