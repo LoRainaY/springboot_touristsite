@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
-public class ShoppingCartTests {
+public class ShoppingCartRepositoryTests {
     @Autowired
     private CartItemRepository cartItemRepository;
     @Autowired
