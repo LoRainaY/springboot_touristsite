@@ -56,39 +56,32 @@ public class TourController {
         } catch (IOException e) {
             throw new IOException("Невозможно сохранить файл: " + fileName);
         }
-
-
         return "admin/adminPage";
     }
-/*    @PostMapping("/admin/delete")
-    public String deleteTourInModal(@ModelAttribute(name = "tour") Tour tour) {
-        tourRepository.delete(tour);
-        return "redirect:/admin/tourList";
-    }*/
     @GetMapping("/delete")
     public String deleteTour(Integer id) {
         tourRepository.deleteById(id);
         return "redirect:/admin/tourList";
     }
 
-
     @GetMapping("/findOne") //for main page
     @ResponseBody
     public Tour findOne(Integer id) {
         return tourRepository.findById(id).get();
     }
+
     @GetMapping("/admin/findOne")
     @ResponseBody
     public Tour findOne2(Integer id) {
         return tourRepository.findById(id).get();
     }
+
     @GetMapping("{productId}")
     public ModelAndView product(@PathVariable Integer productId) {
         return this.tourRepository.findById(productId)
                 .map(product -> new ModelAndView("home/tour",
                         Map.of("product", product), HttpStatus.OK))
                 .orElseGet(() -> new ModelAndView("errors/404",
-                        Map.of("error", "Couldn't find a product"), HttpStatus.NOT_FOUND));
+                        Map.of("error", "Невозможно найти тур"), HttpStatus.NOT_FOUND));
     }
-
 }

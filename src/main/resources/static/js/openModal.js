@@ -31,7 +31,7 @@ $(document).ready(function () {
         $('#modalBeforeDelete #delRef').attr('href', href);
         $('#modalBeforeDelete').modal();
     });
-    $('table .uBtn').on('click', function (event) {
+    $('.uBtn').on('click', function (event) {
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
@@ -66,8 +66,6 @@ $(document).ready(function () {
             $('.userForm #exampleModal2').modal();
         }
     });
-
-
 });
 
 

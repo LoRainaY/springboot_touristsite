@@ -23,6 +23,7 @@
   <section>Мобильный телефон: <span data-th-text="${user.phone}"/></section>
   <section>Персональная скидка: <span th:if="${user.isGetBonus()}">1%</span>
     <span th:unless="${user.isGetBonus()}">0%</span></section></div>
+  <a th:href="@{findOneUser/(id=${user.id})}" class="btn btn-primary uBtn">Edit</a>
 </div>
 
 </body>
