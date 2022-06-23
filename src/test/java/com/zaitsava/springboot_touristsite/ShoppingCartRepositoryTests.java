@@ -47,4 +47,15 @@ public class ShoppingCartRepositoryTests {
         List<CartItem> cartItem=cartItemRepository.findByUser(user);
         assertEquals(1,cartItem.size());
     }
+    @Test
+    public void testDeleteOneCartItem(){
+
+        Tour tour=entityManager.find(Tour.class,5);
+        User user=entityManager.find(User.class,4);
+        CartItem currentCartItem=cartItemRepository.findByUserAndTour(user,tour);
+        cartItemRepository.delete(currentCartItem);
+        List<CartItem> cartItem=cartItemRepository.findByUser(user);
+
+        assertEquals(1,cartItem.size());
+    }
 }

@@ -15,6 +15,9 @@
 <body>
 
 <div th:replace="fragments::navibar">Navigation menu</div>
+<div class="w3-clear prev d-inline float-sm-left ml-3">
+    <a class="btn btn-outline-primary" href="/admin" role="button"><-Назад</a>
+</div>
 <div class="container mt-4">
 
     <table class="table table-hover">
@@ -37,10 +40,6 @@
                 <span th:utext="${tour.endTime}"/></td>
             <td th:utext="${tour.price}"></td>
             <td><a th:href="@{findOne/(id=${tour.id})}" class="btn btn-primary eBtn">Редактировать тур</a>
-            <td><a th:href="@{delete/(id=${tour.id})}" class="btn mx-3 btn-danger delBtn">Deleteтур</a>
-
-                <button  th:onclick="'remove(' + ${tour.id} + ')'" class="btn mx-3 btn-danger delBtn" >Delete</button></td>
-
 
         </tr>
         </tbody>

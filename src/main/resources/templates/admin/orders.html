@@ -14,9 +14,11 @@
 </head>
 <body>
 <div th:replace="fragments::navibar">Navigation menu</div>
-<div class="container mt-4">
-
-    <table class="table table-hover">
+<div class="container-fluid mt-4">
+    <div class="w3-clear prev d-inline float-sm-top ml-3 mb-1">
+        <a class="btn btn-outline-primary" href="/admin" role="button"><-Назад</a>
+    </div>
+    <table class="table table-hover text-center">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -58,7 +60,7 @@
         </tbody>
     </table>
 </div>
-<div th:replace="fragments::modalForChangeTour">Modal</div>
+
 <div th:replace="fragments::modalBeforeDelete">Modal</div>
 
 
@@ -92,6 +94,7 @@
                 'X-CSRF-TOKEN':csrfValue,
             },
         });
+        location.reload();
     }
 
 </script>

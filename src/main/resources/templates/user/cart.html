@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="ru">
 <head>
     <title>Корзина</title>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -13,8 +13,12 @@
     <script type="text/javascript" th:src="@{/js/tourDetails.js}" src="/static/js/tourDetails.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="icon" th:href="@{/images/favicon.ico}"/>
+    <style>
+
+    </style>
 
 </head>
+<body>
 <div th:replace="fragments::navibar">Navigation menu</div>
 <div class="container mt-4">
     <div><h2>Ваша корзина</h2><br>
@@ -22,38 +26,37 @@
     <div class="row mb-1">
         <div class="col-sm-8>">
             <th:block th:each="item, status:${cartItems}">
-                <div class="row border rounded" th:with="tour=${item.tour}">
+                <div class="row border rounded justify-content-around align-items-center" th:with="tour=${item.tour}"                >
                     <div class="col-1">
                         <div>[[${status.count}]]</div>
-                        <div><a class="bi bi-trash3-fill" aria-hidden="true"></a></div>
+                        <div>
+                            <a class="bi bi-trash3-fill link-remove" aria-hidden="true"
+                               href="#">
+                            </a></div>
                     </div>
-                    <div class="col-3">
+                    <div class="col">
                         <img th:src="@{${tour.imagePath}}" class="img-fluid" width="350" height="350"/>
                     </div>
-                    <div class="col-6">
+                    <div class="col">
                         <b><a data-th-href="@{/{tourId}(tourId=${tour.id})}"
                               data-th-text="${tour.title}" target="_blank">
                         </a></b>
-                        <div id="quantity1"  th:replace="fragments::quantity_control(${item.quantity},${item.tour.id})">Количество</div>
+                        <div id="quantity1" class="d-block" th:replace="fragments::quantity_control(${item.quantity},${item.tour.id})">Количество</div>
                         <div>
                             <span>x</span>
                             <span th:id="'price' + ${item.tour.id}">[[${tour.price}]]</span>
                             <span>=</span> <span th:text="${item.tour.price*item.quantity}" th:id="'result' + ${item.tour.id}" class="h4"></span>
+                            <div th:if="${item.quantity>=2}">+скидка 10%
+                                <span>=</span> <span th:text="${(item.tour.price*item.quantity)-(item.tour.price*item.quantity*0.01)}" class="h4" disabled></span>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col book">
+                            <button th:onclick="'send(' + ${item.tour.id} + ')'" class="btn btn-danger mx-5">Забронировать</button>
                     </div>
                 </div>
                 <div class="row m-1">&nbsp;</div>
             </th:block>
-        </div>
-        <div>
-            <div class="col-sm-4" th:unless="${#lists.isEmpty(cartItems)}">
-                <div>
-                    <span class="h3 ml-3">Итоговая стоимость</span>
-                </div>
-                <div class="mt-2 ml-3">
-                    <span id="total" class="h2">[Total Amount]</span>
-                </div>
-            </div>
         </div>
         <div th:if="${#lists.isEmpty(cartItems)}">
             <h3>Ваша корзина пуста</h3>

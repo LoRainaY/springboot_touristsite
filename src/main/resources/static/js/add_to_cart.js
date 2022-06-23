@@ -2,7 +2,24 @@ $(document).ready(function () {
     $("#buttonAddToCart").on("click", function (e) {
         addToCart();
     });
- });
+    $("#book").on("click", function (e) {
+        showCart();
+    });
+
+
+ })
+
+
+function showCart() {
+    done(function (response) {
+        $("#modalTitle").text("Корзина");
+        $("#modalBody").text(response);
+        $("#cartModal").modal();
+        $("#modalTitle").text("Корзина");
+        $("#modalBody").text("Тур забронирован ожидайте звонок сотрудника агентства");
+        $("#cartModal").modal();
+    });
+}
 
 function addToCart() {
     quantity = $("#quantity" + tourId).val();

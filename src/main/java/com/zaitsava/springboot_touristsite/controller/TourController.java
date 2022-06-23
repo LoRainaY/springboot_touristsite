@@ -56,7 +56,7 @@ public class TourController {
         } catch (IOException e) {
             throw new IOException("Невозможно сохранить файл: " + fileName);
         }
-        return "admin/adminPage";
+        return "redirect:/admin/tourList";
     }
     @GetMapping("/delete")
     public String deleteTour(Integer id) {

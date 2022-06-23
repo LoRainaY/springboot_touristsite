@@ -14,6 +14,9 @@
 </head>
 <body>
 <div th:replace="fragments::navibar">Navigation menu</div>
+<div class="w3-clear prev d-inline float-sm-left ml-3">
+    <a class="btn btn-outline-primary" href="/admin" role="button"><-Назад</a>
+</div>
 <div class="container mb-4">
     <div align="center">Добавление тура</div>
     <form action="#" th:action="@{/admin/save}" th:object="${tour}" method="post" class="form-horizontal" enctype="multipart/form-data">
@@ -92,6 +95,13 @@
                 <label class="col-form-label">Описание четвертого дня:</label>
 
                 <textarea rows="5" class="form-control" th:field="*{fourthDayDescription}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-11">
+                <label class="col-form-label">Описание пятого дня:</label>
+
+                <textarea rows="5" class="form-control" th:field="*{fifthDayDescription}"/>
             </div>
         </div>
         <div class="form-group row">

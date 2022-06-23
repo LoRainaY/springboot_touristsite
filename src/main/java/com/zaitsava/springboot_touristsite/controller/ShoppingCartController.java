@@ -2,7 +2,9 @@ package com.zaitsava.springboot_touristsite.controller;
 
 
 import com.zaitsava.springboot_touristsite.entity.CartItem;
+import com.zaitsava.springboot_touristsite.entity.Tour;
 import com.zaitsava.springboot_touristsite.entity.User;
+import com.zaitsava.springboot_touristsite.repository.CartItemRepository;
 import com.zaitsava.springboot_touristsite.service.ShoppingCartService;
 import com.zaitsava.springboot_touristsite.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -21,6 +23,8 @@ public class ShoppingCartController {
     private ShoppingCartService cartService;
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
 
 
@@ -34,6 +38,10 @@ public class ShoppingCartController {
         model.addAttribute("cartItems",cartItemList);
         return "user/cart";
     }
-
+    @GetMapping("/profile/findOneСart")
+    @ResponseBody
+    public CartItem findOneUser(Integer id) {
+        return cartItemRepository.findById(id).get();
+    }
 
 }

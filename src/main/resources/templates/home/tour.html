@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="ru">
 <head>
 
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -15,52 +15,84 @@
     <meta name="product-id" data-th-content="${product.id}"/>
     <title>[[${product.title}]] &#8211; Туристический сайт</title>
     <csrf disabled="true"/>
+    <style>
+        div .cart{
+            display: none;
+        }
+    </style>
 
 </head>
 <body>
 <div th:replace="fragments::navibar">Navigation menu</div>
-<div class="w3-clear nextprev">
+<div class="w3-clear nextprev d-inline float-sm-left ml-3">
     <a class="btn btn-outline-primary" href="/" role="button"><-Назад</a>
 </div>
-<div class="container">
+<div class="container border border-info mb-2">
+    <div class="row mb-3 mt-2 text-sm-center">
+        <div class="col">
+            <img th:src="@{${product.imagePath}}" alt="Card image cap" width="450" />
+        </div>
+        <div class="col-xl text-sm-center text-xl-left">
+            <h1 class="text-info" data-th-text="${product.title}"></h1>
+            <section>Дата: <span id="startTime" data-th-text="${product.startTime}"/> по
+                <span id="endTime" data-th-text="${product.endTime}"/></section>
+            <section>Описание: <span id="description" data-th-text="${product.description}"></span></section>
 
-    <img th:src="@{${product.imagePath}}" alt="Card image cap" width="320" height="200"/>
+            <section>Цена: <span id="price" data-th-text="${product.price}"></span>$</section>
+            <section>Количество человек:
+            <div th:replace="fragments::quantity_control(1,${product.id})">Количество</div>
 
+            <button class="btn btn-danger" id="buttonAddToCart">Добавить в корзину</button></section>
+        </div>
+    </div>
+    <div class="row mb-4" th:if="${product.firstDayDescription != null}">
+        <div class="col">
+            <section><h5 class="text-dark">Первый день:</h5><br>
+                <span id="firstDayDescription" data-th-text="${product.firstDayDescription}"></span></section>
+        </div>
+    </div>
+    <div class="row mb-4" th:if="${product.secondDayDescription != null}">
+        <div class="col">
+            <section><h5 class="text-dark">Второй день:</h5><br>
+                <span id="secondDayDescription" data-th-text="${product.secondDayDescription}"></span></section>
+        </div>
+    </div>
+    <div class="row mb-4" th:if="${product.thirdDayDescription != null}">
+        <div class="col">
+            <section><h5 class="text-dark">Третий день:</h5><br>
+                <span id="thirdDayDescription" data-th-text="${product.thirdDayDescription}"></span></section>
+        </div>
+    </div>
+    <div class="row mb-4" th:if="${product.fourthDayDescription != null}">
+        <div class="col">
+            <section><h5 class="text-dark">Четвертый день:</h5><br>
+                <span id="fourthDayDescription" data-th-text="${product.fourthDayDescription}"></span></section>
+        </div>
+    </div>
+    <div class="row mb-4" th:if="${product.fifthDayDescription != null}">
+        <div class="col">
+            <section><h5 class="text-dark">Пятый день:</h5><br>
+                <span id="fifthDayDescription" data-th-text="${product.fifthDayDescription}"></span></section>
+        </div>
+    </div>
 
-    <h1 data-th-text="${product.title}"></h1>
+    <div class="row mt-4 mb-4 justify-content-around"  >
+        <div class="col-md-5 mt-4" th:if="${product.includeInPrice != null}">
+            <section><h6 class="text-dark">В стоимость входит:</h6><br>
+                <span id="includeInPrice" data-th-text="${product.includeInPrice}"></span></section>
+        </div>
+        <div class="col-md-5 mt-4"  th:if="${product.additionally != null}">
+            <section><h6 class="text-dark">Дополнительно оплачивается:</h6><br>
+                <span id="additionally" data-th-text="${product.additionally}"></span></section>
+        </div>
+    </div>
 
-    <section>Дата: <span id="startTime" data-th-text="${product.startTime}"/> по
-        <span id="endTime" data-th-text="${product.endTime}"/></section>
-
-    <section>Описание: <span id="description" data-th-text="${product.description}"></span></section>
-
-    <section>Цена: <span id="price" data-th-text="${product.price}"></span></section>
-
-    <section th:if="${product.firstDayDescription != null}">Первый день:
-        <span id="firstDayDescription" data-th-text="${product.firstDayDescription}"></span></section>
-
-    <section th:if="${product.secondDayDescription != null}">Второй день:
-        <span id="secondDayDescription" data-th-text="${product.secondDayDescription}"></span></section>
-
-    <section th:if="${product.thirdDayDescription != null}">Третий день:
-        <span id="thirdDayDescription" data-th-text="${product.thirdDayDescription}"></span></section>
-
-    <section th:if="${product.fourthDayDescription != null}">Четвертый день:
-        <span id="fourthDayDescription" data-th-text="${product.fourthDayDescription}"></span></section>
-
-    <section th:if="${product.includeInPrice != null}">В стоимость входит:
-        <span id="includeInPrice" data-th-text="${product.includeInPrice}"></span></section>
-
-    <section th:if="${product.additionally != null}">Дополнительно оплачивается:
-        <span id="additionally" data-th-text="${product.additionally}"></span></section>
-    Количество человек:
-    <div th:replace="fragments::quantity_control(1,${product.id})">Количество</div>
-
-    <button class="btn btn-danger" id="buttonAddToCart">Добавить в корзину</button>
-
-</div>
 
 <div th:replace="fragments::succes_modal">Modal</div>
+
+</div>
+<div th:replace="fragments::footer">Footer</div>
+
 <script type="text/javascript">
     contextPath = "[[@{/}]]";
     var csrfHeaderName = "[[${_csrf.parameterName}]]";

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div th:fragment="navibar">
-<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-4">
     <div class="container">
         <a class="navbar-brand" href="/">Туристический сайт</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -31,8 +31,8 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">О нас</a>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/cart">Корзина</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/profile">Профиль</a>
@@ -51,6 +51,48 @@
     </div>
 </nav>
 </div>
+<div th:fragment="footer">
+<footer class="footer bg-light text-center text-lg-start">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae
+                    aliquam voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);">
+        © 2022 Copyright:
+        <a class="text-dark" href="https://github.com/LoRainaY">Yana Zaitsava</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+</div>
 
 <div th:fragment="quantity_control(qtyValue,tourId)">
     <nav>
@@ -66,10 +108,11 @@
             <li class="page-item">
                 <a  th:onclick="'increase(' + ${tourId} + ')'" class="page-link plusButton" href="" th:pid="${tourId}"><b>+</b></a>
             </li>
-
-            <div>
+<!--            <div class="cart">
+            <div class="book">
                 <button th:onclick="'send(' + ${tourId} + ')'" class="btn btn-danger mx-5">Забронировать</button>
             </div>
+            </div>-->
         </div>
     </nav>
 
@@ -99,7 +142,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">Update tour or Create</h5>
+                        <h5 class="modal-title" id="exampleModalLabel1">Редактирование тура</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -108,35 +151,63 @@
 
                         <div class="form-group">
                             <label for="id" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="id" name="id" value=""/>
+                            <input type="text" class="form-control" id="id" name="id" value="" readonly/>
                         </div>
 
                         <div class="form-group">
-                            <label for="title" class="col-form-label">Title:</label>
+                            <label for="title" class="col-form-label">Заголовок:</label>
                             <input type="text" class="form-control" id="title" name="title" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="description" class="col-form-label">description:</label>
+                            <label for="description" class="col-form-label">Описание:</label>
                             <input type="text" class="form-control" id="description" name="description" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="startTime" class="col-form-label">startTime:</label>
+                            <label for="startTime" class="col-form-label">Начало:</label>
                             <input type="text" class="form-control" id="startTime" name="startTime" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="endTime" class="col-form-label">endTime:</label>
+                            <label for="endTime" class="col-form-label">Конец:</label>
                             <input type="text" class="form-control" id="endTime" name="endTime" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="price" class="col-form-label">price:</label>
+                            <label for="price" class="col-form-label">Цена:</label>
                             <input type="text" class="form-control" id="price" name="price" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstDayDescription" class="col-form-label">Описание первого дня:</label>
+                            <input type="text" class="form-control" id="firstDayDescription" name="firstDayDescription" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="secondDayDescription" class="col-form-label">Описание второго дня:</label>
+                            <input type="text" class="form-control" id="secondDayDescription" name="secondDayDescription" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="thirdDayDescription" class="col-form-label">Описание третьего дня:</label>
+                            <input type="text" class="form-control" id="thirdDayDescription" name="thirdDayDescription" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="fourthDayDescription" class="col-form-label">Описание четверного дня:</label>
+                            <input type="text" class="form-control" id="fourthDayDescription" name="fourthDayDescription" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="fifthDayDescription" class="col-form-label">Описание пятого дня:</label>
+                            <input type="text" class="form-control" id="fifthDayDescription" name="fifthDayDescription" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="includeInPrice" class="col-form-label">Включено в стоимость:</label>
+                            <input type="text" class="form-control" id="includeInPrice" name="includeInPrice" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="additionally" class="col-form-label">Дополнительно оплачивается:</label>
+                            <input type="text" class="form-control" id="additionally" name="additionally" value=""/>
                         </div>
 
                     </div>
                     <div class="modal-footer">
 
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
                     </div>
                 </div>
             </div>
@@ -161,45 +232,45 @@
 
                         <div class="form-group">
                             <label for="idU" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="idU" name="idU" value=""/>
+                            <input type="text" class="form-control" id="idU" name="idU" value="" readonly/>
                         </div>
 
                         <div class="form-group">
-                            <label for="firstname" class="col-form-label">firstname:</label>
+                            <label for="firstname" class="col-form-label">Имя:</label>
                             <input type="text" class="form-control" id="firstname" name="firstname" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="lastname" class="col-form-label">lastname:</label>
+                            <label for="lastname" class="col-form-label">Фамилия:</label>
                             <input type="text" class="form-control" id="lastname" name="lastname" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="patronymic" class="col-form-label">patronymic:</label>
+                            <label for="patronymic" class="col-form-label">Отчество:</label>
                             <input type="text" class="form-control" id="patronymic" name="patronymic" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="email" class="col-form-label">endTime:</label>
+                            <label for="email" class="col-form-label">Эл.почта:</label>
                             <input type="text" class="form-control" id="email" name="email" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="phone" class="col-form-label"> phone:</label>
+                            <label for="phone" class="col-form-label">Телефон:</label>
                             <input type="text" class="form-control" id="phone" name="phone" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-form-label"> password:</label>
+                            <label for="password" class="col-form-label">Пароль:</label>
                             <input type="password" class="form-control" id="password" name="password" value=""/>
                         </div>
                         <div class="form-group">
-                            <label for="bonus" class="col-form-label"> bonus:</label>
+                            <label for="bonus" class="col-form-label">Персональная скидка:</label>
                             <input type="text" class="form-control" id="bonus" name="bonus" value=""/>
                         </div>
                         <div class="form-group" hidden>
-                            <label for="active" class="col-form-label"> bonus:</label>
+                            <label for="active" class="col-form-label">Статус:</label>
                             <input type="text" class="form-control" id="active" name="active" value=""/>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" value="Save or Create"/>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
                     </div>
                 </div>
             </div>
@@ -279,7 +350,7 @@
                 <p class="alert alert-danger">Вы уверены, что хотите удалить выбранный тур?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                 <a href="" class="btn btn-danger" id="delRef">Удалить</a>
             </div>
         </div>

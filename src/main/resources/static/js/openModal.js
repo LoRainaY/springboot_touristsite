@@ -11,6 +11,13 @@ $(document).ready(function () {
                 $('.myForm #startTime').val(tour.startTime);
                 $('.myForm #endTime').val(tour.endTime);
                 $('.myForm #price').val(tour.price);
+                $('.myForm #firstDayDescription').val(tour.firstDayDescription);
+                $('.myForm #secondDayDescription').val(tour.secondDayDescription);
+                $('.myForm #thirdDayDescription').val(tour.thirdDayDescription);
+                $('.myForm #fourthDayDescription').val(tour.fourthDayDescription);
+                $('.myForm #fifthDayDescription').val(tour.fifthDayDescription);
+                $('.myForm #includeInPrice').val(tour.includeInPrice);
+                $('.myForm #additionally').val(tour.additionally);
             });
 
             $('.myForm #exampleModal').modal();
@@ -22,6 +29,13 @@ $(document).ready(function () {
             $('.myForm #startTime').val('');
             $('.myForm #endTime').val('');
             $('.myForm #price').val('');
+            $('.myForm #firstDayDescription').val('');
+            $('.myForm #secondDayDescription').val('');
+            $('.myForm #thirdDayDescription').val('');
+            $('.myForm #fourthDayDescription').val('');
+            $('.myForm #fifthDayDescription').val('');
+            $('.myForm #includeInPrice').val('');
+            $('.myForm #additionally').val('');
             $('.myForm #exampleModal').modal();
         }
     });
@@ -35,7 +49,7 @@ $(document).ready(function () {
         event.preventDefault();
         var href = $(this).attr('href');
         var text = $(this).text();
-        if (text=='Edit') {
+        if (text=='Редактировать') {
             $.get(href, function (user,role, status) {
                 $('.userForm #idU').val(user.id);
                 $('.userForm #lastname').val(user.lastname);

@@ -29,6 +29,8 @@ public class Tour {
     private String thirdDayDescription;
     @Column(name = "fourth_day")
     private String fourthDayDescription;
+    @Column(name="fifth_day")
+    private  String fifthDayDescription;
     @Column(name = "included_in_price")
     private String includeInPrice;
     @Column(name = "additionally")
@@ -124,6 +126,14 @@ public class Tour {
         this.fourthDayDescription = fourthDayDescription;
     }
 
+    public String getFifthDayDescription() {
+        return fifthDayDescription;
+    }
+
+    public void setFifthDayDescription(String fifthDayDescription) {
+        this.fifthDayDescription = fifthDayDescription;
+    }
+
     public String getIncludeInPrice() {
         return includeInPrice;
     }
@@ -154,6 +164,7 @@ public class Tour {
                 ", secondDayDescription='" + secondDayDescription + '\'' +
                 ", thirdDayDescription='" + thirdDayDescription + '\'' +
                 ", fourthDayDescription='" + fourthDayDescription + '\'' +
+                ", fifthDayDescription='" + fifthDayDescription + '\'' +
                 ", includeInPrice='" + includeInPrice + '\'' +
                 ", additionally='" + additionally + '\'' +
                 '}';

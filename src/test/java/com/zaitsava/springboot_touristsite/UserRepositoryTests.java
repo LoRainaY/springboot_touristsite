@@ -43,22 +43,5 @@ public class UserRepositoryTests {
         assertEquals("Петров",lastName);
         assertEquals("Иванович",patronymic);
     }
-    @Test
-    public void saveUserTest(){
 
-        userService.saveUser(getUser());
-        User userAct=userRepository.findById(53);
-        assertEquals("yakov83@mail.com",userAct.getEmail());
-    }
-
-    private User getUser() {
-        User user = new User();
-        user.setFirstname("Маргарита");
-        user.setLastname("Яковлева");
-        user.setPatronymic("Ивановна");
-        user.setEmail("yakov83@mail.com");
-        user.setPassword("UsRe107066");
-        user.setPhone("+375449873480");
-        return user;
-    }
 }

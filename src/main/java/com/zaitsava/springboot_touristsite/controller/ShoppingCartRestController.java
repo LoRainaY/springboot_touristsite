@@ -35,5 +35,20 @@ public class ShoppingCartRestController {
         Integer addedQuantity=cartService.addTour(tourId,quantity,user);
         return addedQuantity+" шт. тура были добавлены в вашу корзину.";
     }
+/*
+    @PostMapping("/cart/remove/{pid}")
+    public String removeItemFromCart(@PathVariable("pid")Integer tourId,
+                                @AuthenticationPrincipal Authentication authentication){
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication==null||authentication instanceof AnonymousAuthenticationToken){
+            return "Ваш нужно войти чтобы удалить этот тур";
+        }
+        User user = userService.findUserByEmail(authentication.getName());
+        if(user==null) System.out.println("User is null");
+
+        cartService.removeItem(tourId,user);
+        return "Тур удален с вашей корзины.";
+    }
+*/
 
 }
