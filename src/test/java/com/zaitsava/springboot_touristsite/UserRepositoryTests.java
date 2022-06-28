@@ -28,13 +28,13 @@ public class UserRepositoryTests {
     private TestEntityManager entityManager;
 
     @Test
-    public void findByEmailTest(){
+    public void findByEmailTest(){  // поиск по email
         User user=userRepository.findByEmail("angels1070@gmail.com");
         Integer userId=user.getId();
         assertEquals(2,userId);
     }
     @Test
-    public void findByIdTest(){
+    public void findByIdTest(){ // поиск по id
         User user=userRepository.findById(3);
         String firstName=user.getFirstname();
         String lastName=user.getLastname();
@@ -43,5 +43,4 @@ public class UserRepositoryTests {
         assertEquals("Петров",lastName);
         assertEquals("Иванович",patronymic);
     }
-
 }

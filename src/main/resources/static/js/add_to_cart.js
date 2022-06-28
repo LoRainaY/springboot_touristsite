@@ -2,8 +2,10 @@ $(document).ready(function () {
     $("#buttonAddToCart").on("click", function (e) {
         addToCart();
     });
-    $("#book").on("click", function (e) {
-        showCart();
+    $(".bookBtn").on("click", function (e) {
+        $("#modalTitle").text("Корзина");
+        $("#modalBody").text("Тур забронирован ожидайте звонок сотрудника агентства");
+        $("#cartModal").modal();
     });
 
 

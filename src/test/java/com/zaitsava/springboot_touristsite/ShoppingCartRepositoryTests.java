@@ -26,7 +26,7 @@ public class ShoppingCartRepositoryTests {
     private TestEntityManager entityManager;
 
     @Test
-    public void testAddOneCartItem(){
+    public void testAddOneCartItem(){ // добавление тура в корзину
        Tour tour=entityManager.find(Tour.class,10);
        User user=entityManager.find(User.class,4);
 
@@ -40,7 +40,7 @@ public class ShoppingCartRepositoryTests {
     }
 
     @Test
-    public void testGetItemByUser(){
+    public void testGetItemByUser(){ // получение тура в корзине по id пользователя
         User user=new User();
         user.setId(4);
 
@@ -48,8 +48,7 @@ public class ShoppingCartRepositoryTests {
         assertEquals(1,cartItem.size());
     }
     @Test
-    public void testDeleteOneCartItem(){
-
+    public void testDeleteOneCartItem(){ // удаление тура из корзины
         Tour tour=entityManager.find(Tour.class,5);
         User user=entityManager.find(User.class,4);
         CartItem currentCartItem=cartItemRepository.findByUserAndTour(user,tour);

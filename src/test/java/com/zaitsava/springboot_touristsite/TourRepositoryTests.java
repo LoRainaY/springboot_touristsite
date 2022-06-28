@@ -20,12 +20,12 @@ public class TourRepositoryTests {
     private TourRepository tourRepository;
 
     @Test
-    public void getTourByIdTest(){
+    public void getTourByIdTest(){ // поиск по id
         Tour tour = tourRepository.findById(5).get();
         assertEquals("Московское путешествие",tour.getTitle());
     }
     @Test
-    public void getAllTourTest(){
+    public void getAllTourTest(){ // получение всех туров
         List<Tour> tourList = tourRepository.findAll();
         assertEquals(5,tourList.size());
     }

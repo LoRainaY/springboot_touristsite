@@ -41,7 +41,7 @@
             <td th:utext="${order.user.firstname}"></td>
             <td th:utext="${order.user.lastname}"></td>
             <td th:utext="${order.user.patronymic}"></td>
-            <td th:utext="${order.user.email}"/></td>
+            <td th:utext="${order.user.email}"></td>
             <td th:utext="${order.user.phone}"></td>
             <td th:utext="${order.tour.id}"></td>
             <td th:utext="${order.tour.title}"></td>
@@ -60,8 +60,6 @@
         </tbody>
     </table>
 </div>
-
-<div th:replace="fragments::modalBeforeDelete">Modal</div>
 
 
 <script>
@@ -94,7 +92,7 @@
                 'X-CSRF-TOKEN':csrfValue,
             },
         });
-        location.reload();
+
     }
 
 </script>
