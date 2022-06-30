@@ -14,7 +14,7 @@
     <name>springboot_touristsite</name>
     <description>springboot_touristsite</description>
     <properties>
-        <java.version>16</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
 
