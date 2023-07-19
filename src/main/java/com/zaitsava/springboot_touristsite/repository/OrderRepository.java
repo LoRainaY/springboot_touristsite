@@ -12,6 +12,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
 
 
     @Modifying
-    @Query(value = "DELETE FROM sorder  where id= :id",nativeQuery = true)
+    @Query(value = "DELETE FROM order where id= :id",nativeQuery = true)
     void deleteOrderById(@Param("id")Long id);
 }
