@@ -4,6 +4,7 @@ import com.zaitsava.springboot_touristsite.entity.Role;
 import com.zaitsava.springboot_touristsite.entity.User;
 import com.zaitsava.springboot_touristsite.repository.RoleRepository;
 import com.zaitsava.springboot_touristsite.repository.UserRepository;
+import com.zaitsava.springboot_touristsite.repository.UserRepositoryPDF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
